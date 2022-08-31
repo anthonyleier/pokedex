@@ -25,21 +25,23 @@ async function fetchPokemon(pokemon) {
 
 async function renderPokemon(pokemon) {
     pokemonName.innerHTML = "Searching...";
+    pokemonNumber.innerHTML = "";
     const data = await fetchPokemon(pokemon);
 
     if (data) {
         pokemonID = data.id;
-
         pokemonName.innerHTML = data.name;
-        pokemonNumber.innerHTML = pokemonID;
+        pokemonNumber.innerHTML = pokemonID + " - ";
+
+        pokemonImage.style.display = "block";
         pokemonImage.src = data["sprites"]["versions"]["generation-v"]["black-white"]["animated"]["front_default"];
 
         input.value = "";
 
     } else {
         pokemonName.innerHTML = "Not found";
-        pokemonNumber.innerHTML = "?";
-        pokemonImage.src = "https://w7.pngwing.com/pngs/626/602/png-transparent-question-mark-interrogative-others-miscellaneous-text-logo-thumbnail.png";
+        pokemonNumber.innerHTML = "? - ";
+        pokemonImage.style.display = "none";
     }
 }
 
